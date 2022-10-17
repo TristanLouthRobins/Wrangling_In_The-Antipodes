@@ -1,0 +1,153 @@
+# Script for computing acoustic indices using the soundecology package.
+# Tristan Louth-Robins. 2021-22
+
+# Version 2.4 (Oct 2022): all three steps now in single script, improved functions, execution of overall workflow.
+###################################
+
+#####################################
+# STAGE 1: COMPUTE ACOUSTIC INDICES #
+#####################################
+
+# REQUIRED LIBRARIES FOR STAGE 1
+library(soundecology)
+
+getwd() # get working directory and paste as string below 
+dir <- getwd() # set working directory
+files <- "raw_data" # File path for import of raw acoustic data:
+file_import <- paste(dir, files, sep = "/")
+
+bi <-  "bioacoustic_index"
+aci <-  "acoustic_complexity"
+adi <-  "acoustic_diversity"
+aei <- "acoustic_evenness"
+ndsi <-  "ndsi"
+
+sub_folder <- "lady_bay_audiomoth" # <-- destination folder for outputs
+
+# FUNCTION FOR COMPUTING INDICES FROM DATA
+compute_indices <- function(index, site, batch_no, note){
+  # create the destination and output
+  dest1 <- paste(site, "batch", batch_no, index, note, sep="_")
+  dest2 <- paste(dest1, "csv", sep=".")
+  dest3 <- "results" # results folder
+  dest4 <- paste(dest3, sub_folder, dest2, sep = "/") # <-- this might not work due to three paste items. Check it!
+  dest <- paste(dir, dest4, sep ="/")
+  # call multiple_sounds() and pass relevant parameters
+  multiple_sounds(directory = file_import, 
+                  resultfile = dest,
+                  soundindex = index,
+                  no_cores = "max")
+}
+
+compute_indices(aci,          # <-- index
+                "audiomoth-H-oct22-lady_bay_reef",   # <-- string for site of recording
+                0,            # <-- batch number
+                "")           # <-- misc. note
+
+#####################################
+# STAGE 2: READ IN RESULTS AND TIDY #
+#####################################
+
+# REQUIRED LIBRARIES FOR STAGE 2
+
+library(tidyverse)
+library(forcats)
+library(stringr)
+library(lubridate)
+library(chron)
+
+# FUNCTION FOR TIDYING THE IMPORTED RESULTS
+
+tidy_data <- function(input) {
+  output <- input %>% 
+    separate(FILENAME, into = c("date", "time", sep = "_")) %>% 
+    mutate(date = gsub("^(.{4})(.*)$", "\\1-\\2", date), date = gsub("^(.{7})(.*)$", "\\1-\\2", date)) %>%
+    mutate(date = as.Date(date, format = "%Y-%m-%d")) %>%
+    mutate(time = gsub("^(.{2})(.*)$", "\\1:\\2", time), time = gsub("^(.{5})(.*)$", "\\1:\\2", time)) %>% 
+    mutate(time = chron(times = time)) %>% # coerce chr time string into time data format.
+    mutate(mins = format(strptime(time,"%H:%M:%S"), '%M')) %>% 
+    mutate(hour = format(strptime(time,"%H:%M:%S"), '%H')) %>% 
+    mutate(mins = as.numeric(mins), hour = as.numeric(hour)) %>% 
+    select(date, time, INDEX, mins, hour, LEFT_CHANNEL) %>% 
+    rename(value = LEFT_CHANNEL, index = INDEX) %>% 
+    group_by(date) 
+  
+  output <- output %>% 
+    mutate(date = as.character.Date(date)) %>% 
+    mutate(date.data = date) %>% 
+    separate(date.data, into = c("year", "month", "day", sep = "-")) %>% 
+    select(- `-`) 
+  
+  output <- output[,c("date", "time", "year", "month", "day", "mins", "hour", "index", "value")]  
+  
+  return(output)
+}
+
+# FUNCTION FOR CREATING CATEGORICAL VARIABLES
+
+cat_data <- function(tidy_df) {
+  cat <- tidy_df %>% 
+    # Period of day, defined by range of 'hour' variable. 
+    mutate(period = ifelse(hour %in% 0:4, "pre-dawn", 
+                           ifelse(hour %in% 5:7, "dawn", 
+                                  ifelse(hour %in% 8:11, "morning",
+                                         ifelse(hour %in% 12:13, "midday",
+                                                ifelse(hour %in% 14:17, "afternoon",
+                                                       ifelse(hour %in% 18:19, "dusk", 
+                                                              ifelse(hour %in% 20: 23, "night","X"))))))) 
+    ) %>% 
+    mutate(period = as.factor(period)) %>% 
+    # Season, defined by range of 'month' variable.
+    mutate(season = ifelse(month == 12 | 1 | 2, "Summer",
+                           ifelse(month == 3 | 4 | 5, "Autumn",
+                                  ifelse(month == 6 | 07 | 8, "Winter",
+                                         ifelse(month == 9 | 10 | 11, "Spring","X"))))
+    ) %>% 
+    mutate(season = as.factor(season))
+  
+  # re-order factors 
+  cat$period <- ordered(cat$period, levels = c("pre-dawn", "dawn", "morning", "midday", "afternoon", "dusk", "night"))
+  cat$season <- ordered(cat$season, levels = c("Summer", "Autumn", "Winter", "Spring"))
+  
+  # re-coerce date variable as date data type:
+  cat <- cat %>% 
+    mutate(date = as.Date(date, format = "%Y-%m-%d")) %>% 
+    # coerce split (individual) date variable as factors
+    mutate(year = as.factor(year),
+           month = as.factor(month),
+           day = as.factor(day)) 
+  
+  return(cat) 
+}  
+
+# Weirdly, the function is turning month 7 into 'Summer' don't currently know why.
+
+###
+
+import_path <- paste("/Users/tristanlouth-robins/data_science/acoustic_ecology_tests/results", sub_folder, sep="/")
+setwd(import_path)
+getwd() # <-- check that path is up to date.
+
+# The below will pull all csv files stored in the designated sub_folder into a single dataframe.
+# From here, the dataframe will be tidied up.
+
+t <- list.files(pattern="*.csv") %>% 
+  map_df(~read_csv(.))
+
+# for a single .csv, simple execute the line below
+# t.s <- read_csv(".csv")
+
+tidy_t <- tidy_data(t)
+view(tidy_t)
+
+complete_t <- cat_data(tidy_t)
+
+#######################################
+# STAGE 3: WRITE TIDY DATA TO NEW CSV #
+#######################################
+destination <- "/Users/tristanlouth-robins/data_science/acoustic_ecology_tests/results"
+
+project_name <- paste("lady_bay_oct_22_data", ".csv", sep="")
+write_to <-  paste(destination, project_name, sep = "/")
+
+write_csv(complete_t, write_to)
