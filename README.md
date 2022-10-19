@@ -1,5 +1,5 @@
 # Wrangling In The Antipodes
-## Data repo for data science blog
+## Data repo for data science blog - https://wranglingintheantipodes.wordpress.com/
 ### Includings code, some datasets and other resources relevant to research covered on the blog.
 
 Latest update: 20/10/2022
