@@ -1,9 +1,11 @@
-# Wrangling In The Antipodes
-## Data repo for data science blog - https://wranglingintheantipodes.wordpress.com/
-### Includings code, some datasets and other resources relevant to research covered on the blog.
+# Wrangling In The Antipodes (WITA)
+## https://wranglingintheantipodes.wordpress.com/
 
-Latest update: 20/10/2022
-Currently the code and some datasets are available for the following blog posts:
+### WITA is a blog maintained by Tristan Louth-Robins to explore acoustic ecology with data science tools. 
+
+This repo includes code, some datasets and other resources relevant to research covered on the blog. *Not everything published to the blog is featured here yet, I'm in the process of doing this though.* 
+
+--- Latest update: 20/10/2022 --- 
 
 ### "Preparing big audio files for analysis" - published 20/10/2021
 URL: https://wranglingintheantipodes.wordpress.com/2021/10/20/preparing-big-audio-files-for-analysis/
