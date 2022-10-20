@@ -35,6 +35,6 @@ WITA_G-audiomoth_compute_indices_and_tidy_data.R (Version 2.4 - October 2022)
 2) Tidy data function and call to import the .csv dataset and tidy/factorise variable data.
 3) Write tidy data to updated .csv file for subsequent EDA.
 
-Current issues: there's a couple of bugs with the factorisation I haven't resolved yet. See Line 123. 
+Current issues: there's a couple of bugs with the factorisation I haven't resolved yet. See Issues log. 
 
 
