@@ -32,6 +32,9 @@ data$index <- as.factor(data$index)
 n <- dim(data)[1]
 data <- data[1:(n-1),]
 
+# Optional: removing first two observations (heavy rain) to remove lm-smooth skew in plot.
+data <- slice(data, -(1:2))
+
 # Create variables from observations specific to unique events over period of overnight deployment --------------------------------------------- 
 deploy <- data %>% filter(hour == 12 & mins == 00)
 retrieve <- data %>% filter(hour == 10 & mins == 00)
@@ -64,7 +67,7 @@ d_1 <- data %>%
   filter(date == "2022-10-08") %>% 
   ggplot(aes(x=time, y=value)) +
   geom_point(colour=points) +
-#  geom_smooth(colour="#ffffff") +
+  geom_smooth(colour="#ffffff") +
   geom_vline(data = deploy, aes(xintercept=time), colour = "green", alpha = 0.8, linetype="dashed") +
   geom_point(data = raining1, aes(x=time, y=value), colour = points, shape=8, size=4, alpha=0.5) +
   geom_point(data = raining2, aes(x=time, y=value), colour = points, shape=8, size=4, alpha=0.5) +
@@ -81,7 +84,7 @@ d_2 <- data %>%
   filter(date == "2022-10-09") %>% 
   ggplot(aes(x=time, y=value)) +
   geom_point(colour=points) +
-#  geom_smooth(colour="#ffffff") +
+  geom_smooth(colour="#ffffff") +
   geom_vline(data = retrieve, aes(xintercept=time), colour = "red", alpha=0.8, linetype="dashed") +
   geom_point(data = hightide_091022, aes(x=time, y=value), colour = "red", shape=24, size=4, stroke=2) +
   geom_label(data = hightide_091022, label = "High: 1.40m", y=2450, alpha=label_alpha) +
@@ -101,3 +104,5 @@ viz <- d_1 +
        y = "ACI value") +
   d_2 +
   labs(caption = "Wrangling In The Antipodes: 'Acoustic complexity as an indicator of tidal activity'\nTristan Louth-Robins, 2022. Github: /TristanLouthRobins")
+
+viz
