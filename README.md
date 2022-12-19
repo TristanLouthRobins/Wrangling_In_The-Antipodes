@@ -25,7 +25,7 @@ WITA_10-dataset.csv
 URL: https://wranglingintheantipodes.wordpress.com/2022/08/10/acoustic-detection-in-monitor-an-overview/
 
 WITA_11-intro_to_monitoR.R
-- R script for using `monitoR` package to generate correlation templates and perform analysis. **Note: acoustic data is not provided and the user will having to supply their own data.**
+- R script for using `monitoR` package to generate correlation templates and perform analysis. **Note: acoustic data is not provided and the user will have to supply their own data.**
 
 ### "Acoustic Complexity as an indicator of tidal activity" - published 19/12/2022
 URL: https://wranglingintheantipodes.wordpress.com/2022/12/19/acoustic-complexity-as-an-indicator-of-tidal-activity/
