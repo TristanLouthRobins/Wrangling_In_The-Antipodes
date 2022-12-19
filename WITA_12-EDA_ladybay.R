@@ -3,7 +3,7 @@
 # Tristan Louth-Robins, December 2022     
 ########################################################################################
 # Post can found here:                                                                 #
-# https:// #
+# https://wranglingintheantipodes.wordpress.com/2022/12/19/acoustic-complexity-as-an-indicator-of-tidal-activity/
 ########################################################################################
 
 # Required dependencies ----------------------------------------------------------------
