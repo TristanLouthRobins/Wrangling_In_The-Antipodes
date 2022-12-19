@@ -7,13 +7,13 @@ This repo includes scripts, some datasets and other resources relevant to resear
 
 --- Latest update: 20/10/2022 --- 
 
-### "Preparing big audio files for analysis" - published 20/10/2021
+### "8. Preparing big audio files for analysis" - published 20/10/2021
 URL: https://wranglingintheantipodes.wordpress.com/2021/10/20/preparing-big-audio-files-for-analysis/
 
 WITA_08-label_data.R 
 - R script for generating label data in conjunction with Audacity.
 
-### "NDSI: parameters in context" - published 9/4/2022
+### "10. NDSI: parameters in context" - published 9/4/2022
 URL: https://wranglingintheantipodes.wordpress.com/2022/04/09/ndsi-parameters-in-context/
 
 WITA_10-NDSI_params_in_context.R
@@ -21,13 +21,13 @@ WITA_10-NDSI_params_in_context.R
 WITA_10-dataset.csv
 - Dataset to be used in conjunction with the above R code.
 
-### "Acoustic detection in monitoR – an overview" - published 10/8/2022
+### "11. Acoustic detection in monitoR – an overview" - published 10/8/2022
 URL: https://wranglingintheantipodes.wordpress.com/2022/08/10/acoustic-detection-in-monitor-an-overview/
 
 WITA_11-intro_to_monitoR.R
 - R script for using `monitoR` package to generate correlation templates and perform analysis. **Note: acoustic data is not provided and the user will have to supply their own data.**
 
-### "Acoustic Complexity as an indicator of tidal activity" - published 19/12/2022
+### "12. Acoustic Complexity as an indicator of tidal activity" - published 19/12/2022
 URL: https://wranglingintheantipodes.wordpress.com/2022/12/19/acoustic-complexity-as-an-indicator-of-tidal-activity/
 
 WITA_12-EDA_ladybay.R
