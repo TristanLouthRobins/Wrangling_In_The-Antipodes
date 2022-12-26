@@ -1,14 +1,15 @@
 # Script for computing acoustic indices using the soundecology package.
 # Tristan Louth-Robins. 2021-22
 
-# Version 2.4 (Oct 2022): all three steps now in single script, improved functions, execution of overall workflow.
-###################################
+# Version 2.5 (Dec 2022): 
+# - all three steps now in single script.
+# - fixed the error in factorisation turning all month variables into a 'Summer' category.
 
 #####################################
 # STAGE 1: COMPUTE ACOUSTIC INDICES #
 #####################################
 
-# REQUIRED LIBRARIES FOR STAGE 1
+# Required libraries for Stage 1 -----------------------------------
 library(soundecology)
 
 getwd() # get working directory and paste as string below 
@@ -22,7 +23,7 @@ adi <-  "acoustic_diversity"
 aei <- "acoustic_evenness"
 ndsi <-  "ndsi"
 
-sub_folder <- "lady_bay_audiomoth" # <-- destination folder for outputs
+sub_folder <- "outputs" # <-- destination folder for outputs
 
 # FUNCTION FOR COMPUTING INDICES FROM DATA
 compute_indices <- function(index, site, batch_no, note){
@@ -48,7 +49,7 @@ compute_indices(aci,          # <-- index
 # STAGE 2: READ IN RESULTS AND TIDY #
 #####################################
 
-# REQUIRED LIBRARIES FOR STAGE 2
+# Required libraries for Stage 2 ------------------------------
 
 library(tidyverse)
 library(forcats)
@@ -56,7 +57,7 @@ library(stringr)
 library(lubridate)
 library(chron)
 
-# FUNCTION FOR TIDYING THE IMPORTED RESULTS
+# Function for tidying the imported results -------------------
 
 tidy_data <- function(input) {
   output <- input %>% 
@@ -83,7 +84,7 @@ tidy_data <- function(input) {
   return(output)
 }
 
-# FUNCTION FOR CREATING CATEGORICAL VARIABLES
+# Function for creating categorical variables ----------------------
 
 cat_data <- function(tidy_df) {
   cat <- tidy_df %>% 
@@ -96,12 +97,13 @@ cat_data <- function(tidy_df) {
                                                        ifelse(hour %in% 18:19, "dusk", 
                                                               ifelse(hour %in% 20: 23, "night","X"))))))) 
     ) %>% 
-    mutate(period = as.factor(period)) %>% 
+    mutate(month = as.numeric(month),
+           period = as.factor(period)) %>% 
     # Season, defined by range of 'month' variable.
-    mutate(season = ifelse(month == 12 | 1 | 2, "Summer",
-                           ifelse(month == 3 | 4 | 5, "Autumn",
-                                  ifelse(month == 6 | 07 | 8, "Winter",
-                                         ifelse(month == 9 | 10 | 11, "Spring","X"))))
+    mutate(season = ifelse(month %in% c(1,2,12), "Summer",
+                           ifelse(month %in% c(3,4,5), "Autumn",
+                                  ifelse(month %in% c(6,7,8), "Winter",
+                                         ifelse(month %in% c(9,10,11), "Spring","X"))))
     ) %>% 
     mutate(season = as.factor(season))
   
@@ -120,34 +122,29 @@ cat_data <- function(tidy_df) {
   return(cat) 
 }  
 
-# Weirdly, the function is turning month 7 into 'Summer' don't currently know why.
-
-###
-
-import_path <- paste("/Users/tristanlouth-robins/data_science/acoustic_ecology_tests/results", sub_folder, sep="/")
-setwd(import_path)
 getwd() # <-- check that path is up to date.
+import_path <- paste("/Users/tristanlouthrobins/Documents/Documents - MacBook Pro/R data and projects", sub_folder, sep="/")
+setwd(import_path)
 
+# For mutiple datasets, assign the 't' variable below:
 # The below will pull all csv files stored in the designated sub_folder into a single dataframe.
-# From here, the dataframe will be tidied up.
-
 t <- list.files(pattern="*.csv") %>% 
   map_df(~read_csv(.))
 
-# for a single .csv, simple execute the line below
-# t.s <- read_csv(".csv")
+# For signle datasets, assign the 't.s' variable below:
+t.s <- read_csv("data/test.csv")
 
-tidy_t <- tidy_data(t)
-view(tidy_t)
-
+tidy_t <- tidy_data(t.s)
 complete_t <- cat_data(tidy_t)
+head(complete_t)
 
 #######################################
 # STAGE 3: WRITE TIDY DATA TO NEW CSV #
 #######################################
-destination <- "/Users/tristanlouth-robins/data_science/acoustic_ecology_tests/results"
 
-project_name <- paste("lady_bay_oct_22_data", ".csv", sep="")
+destination <- "/Users/tristanlouthrobins/data_science/acoustic_ecology_tests/results"
+
+project_name <- paste("name_of_your_output_dataset", ".csv", sep="")
 write_to <-  paste(destination, project_name, sep = "/")
 
 write_csv(complete_t, write_to)
