@@ -1,21 +1,32 @@
 # Script for computing acoustic indices using the soundecology package.
 # Tristan Louth-Robins. 2021-22
 
-# Version 2.5 (Dec 2022): 
-# - all three steps now in single script.
-# - fixed the error in factorisation turning all month variables into a 'Summer' category.
+# Version 2.6 (January 1st 2023): 
+# 2.0 - all three steps now in single script.
+# 2.5 - fixed the error in factorisation turning all month variables into a 'Summer' category.
+# 2.6 - cleaned up file import code, cleaner and more efficient.
 
-#####################################
-# STAGE 1: COMPUTE ACOUSTIC INDICES #
-#####################################
-
-# Required libraries for Stage 1 -----------------------------------
+# STEP 1: COMPUTE ACOUSTIC INDICES ----------------------------------------------------------------------------------
+# Required libraries -
 library(soundecology)
 
-getwd() # get working directory and paste as string below 
-dir <- getwd() # set working directory
-files <- "raw_data" # File path for import of raw acoustic data:
-file_import <- paste(dir, files, sep = "/")
+session_path <- "/Users/tristanlouth-robins/data_science/acoustic_ecology" # set path for raw data import
+sub_folder <- "results/lady_bay-22-12" # <-- destination folder for csv output
+data <- "raw_data" # Sub folder containing raw acoustic data:
+data_import <- paste(session_path, data, sep = "/")
+
+# Function: compute defined index from imported data batch -----------------------------------------
+compute_indices <- function(index, site, batch, note){
+  # set the destination folder and output
+  dest_path <- paste(session_path, sub_folder, sep="/") 
+  csv <- paste(site, batch, index, note, sep="_")
+  file <- paste(csv, ".csv", sep="")
+  dest <- paste(dest_path, file, sep="/")
+  multiple_sounds(directory = data_import, 
+                  resultfile = dest,
+                  soundindex = index,
+                  no_cores = "max")
+}
 
 bi <-  "bioacoustic_index"
 aci <-  "acoustic_complexity"
@@ -23,33 +34,14 @@ adi <-  "acoustic_diversity"
 aei <- "acoustic_evenness"
 ndsi <-  "ndsi"
 
-sub_folder <- "outputs" # <-- destination folder for outputs
-
-# FUNCTION FOR COMPUTING INDICES FROM DATA
-compute_indices <- function(index, site, batch_no, note){
-  # create the destination and output
-  dest1 <- paste(site, "batch", batch_no, index, note, sep="_")
-  dest2 <- paste(dest1, "csv", sep=".")
-  dest3 <- "results" # results folder
-  dest4 <- paste(dest3, sub_folder, dest2, sep = "/") # <-- this might not work due to three paste items. Check it!
-  dest <- paste(dir, dest4, sep ="/")
-  # call multiple_sounds() and pass relevant parameters
-  multiple_sounds(directory = file_import, 
-                  resultfile = dest,
-                  soundindex = index,
-                  no_cores = "max")
-}
-
 compute_indices(aci,          # <-- index
-                "audiomoth-H-oct22-lady_bay_reef",   # <-- string for site of recording
+                "moth003-23_to_31-12-22-lady_bay_meadow_cove",   # <-- string for site of recording
                 0,            # <-- batch number
                 "")           # <-- misc. note
 
-#####################################
-# STAGE 2: READ IN RESULTS AND TIDY #
-#####################################
 
-# Required libraries for Stage 2 ------------------------------
+# STAGE 2: READ IN RESULTS AND TIDY ----------------------------------------------------------------------------------
+# Required libraries  -
 
 library(tidyverse)
 library(forcats)
@@ -122,29 +114,26 @@ cat_data <- function(tidy_df) {
   return(cat) 
 }  
 
-getwd() # <-- check that path is up to date.
-import_path <- paste("/Users/tristanlouthrobins/Documents/Documents - MacBook Pro/R data and projects", sub_folder, sep="/")
+# Import tabular data for tidying ----------------------------------------------------
+import_path <- paste(session_path, sub_folder, sep="/")
 setwd(import_path)
 
-# For mutiple datasets, assign the 't' variable below:
+# For mutiple batched datasets, assign the 't' variable below:
 # The below will pull all csv files stored in the designated sub_folder into a single dataframe.
 t <- list.files(pattern="*.csv") %>% 
   map_df(~read_csv(.))
 
-# For signle datasets, assign the 't.s' variable below:
-t.s <- read_csv("data/test.csv")
+# For single datasets, assign the 't.s' variable.
+# Enter the file you want to import below:
+file <- "moth003-23_to_31-12-22-lady_bay_meadow_cove_0_acoustic_complexity_.csv"
+t.s <- read_csv(file)
 
 tidy_t <- tidy_data(t.s)
 complete_t <- cat_data(tidy_t)
 head(complete_t)
 
-#######################################
-# STAGE 3: WRITE TIDY DATA TO NEW CSV #
-#######################################
+# STAGE 3: WRITE TIDY DATA TO NEW CSV -------------------------------------------------
 
-destination <- "/Users/tristanlouthrobins/data_science/acoustic_ecology_tests/results"
+tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
 
-project_name <- paste("name_of_your_output_dataset", ".csv", sep="")
-write_to <-  paste(destination, project_name, sep = "/")
-
-write_csv(complete_t, write_to)
+write_csv(complete_t, tidy_file)
