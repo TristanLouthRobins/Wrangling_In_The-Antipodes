@@ -5,7 +5,7 @@
 
 This repo includes scripts, some datasets and other resources relevant to research covered on the blog. *Not everything published to the blog is featured here yet, I'm in the process of doing this though.* 
 
---- Latest update: 26/12/2022 --- 
+--- Latest update: 1/1/2023 --- 
 
 ### "8. Preparing big audio files for analysis" - published 20/10/2021
 URL: https://wranglingintheantipodes.wordpress.com/2021/10/20/preparing-big-audio-files-for-analysis/
@@ -35,7 +35,7 @@ WITA_12-EDA_ladybay.R
 
 ## AudioMoth - General scripts
 
-WITA_G-audiomoth_compute_indices_and_tidy_data.R (Version 2.4 - October 2022)
+WITA_G-audiomoth_compute_indices_and_tidy_data.R (Version 2.6 - Jan 2023)
 - R script which can be used in conjunction with AudioMoth acoustic data. Contains functions which will perform the following workflow:
 1) Compute user-defined acoustic indicies specific to the R package `acousticecology` and export the results as a .csv dataset.
 2) Tidy data function and call to import the .csv dataset and tidy/factorise variable data.
