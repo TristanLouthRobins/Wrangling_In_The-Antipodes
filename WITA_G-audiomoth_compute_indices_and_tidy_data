@@ -1,19 +1,21 @@
 # Script for computing acoustic indices using the soundecology package.
 # Tristan Louth-Robins. 2021-22
 
-# Version 2.6 (January 1st 2023): 
+# Version 2.7 (January 4th 2023): 
 # 2.0 - all three steps now in single script.
 # 2.5 - fixed the error in factorisation turning all month variables into a 'Summer' category.
 # 2.6 - cleaned up file import code, cleaner and more efficient.
+# 2.7 - new function for user input of site variable.
 
 # STEP 1: COMPUTE ACOUSTIC INDICES ----------------------------------------------------------------------------------
 # Required libraries -
 library(soundecology)
+setwd("/Users/tristanlouth-robins/data_science/acoustic_ecology/")
 
-session_path <- "/Users/tristanlouth-robins/data_science/acoustic_ecology" # set path for raw data import
-sub_folder <- "results/lady_bay-22-12" # <-- destination folder for csv output
+session_path <- "/Users/tristanlouth-robins/data_science/acoustic_ecology/" # set path for raw data import
+sub_folder <- "results/lady_bay-22-12/" # <-- destination folder for csv output
 data <- "raw_data" # Sub folder containing raw acoustic data:
-data_import <- paste(session_path, data, sep = "/")
+data_import <- paste(session_path, data, sep = "")
 
 # Function: compute defined index from imported data batch -----------------------------------------
 compute_indices <- function(index, site, batch, note){
@@ -34,16 +36,31 @@ adi <-  "acoustic_diversity"
 aei <- "acoustic_evenness"
 ndsi <-  "ndsi"
 
-compute_indices(aci,          # <-- index
+compute_indices(aei,          # <-- index
                 "moth003-23_to_31-12-22-lady_bay_meadow_cove",   # <-- string for site of recording
                 0,            # <-- batch number
                 "")           # <-- misc. note
 
 
+# INTERIM STEP: Include site variable for dataset -------------------------------------------------------------------
+# Required libraries  -
+library(tidyverse)
+
+site_input <- function(file){
+  df_input <- read_csv(file)
+  site_name <- readline(prompt="Enter site name: ")
+  df_output <- mutate(df_input, site = site_name)
+  print("Site name assigned and .csv file updated.")
+  write_csv(df_output, file)
+}
+
+site_input(paste(sub_folder, "moth003-23_to_31-12-22-lady_bay_meadow_cove_0_acoustic_evenness_.csv", sep = ""))
+
+# Meadow cove
+# Reef extent 1
+
 # STAGE 2: READ IN RESULTS AND TIDY ----------------------------------------------------------------------------------
 # Required libraries  -
-
-library(tidyverse)
 library(forcats)
 library(stringr)
 library(lubridate)
@@ -61,8 +78,8 @@ tidy_data <- function(input) {
     mutate(mins = format(strptime(time,"%H:%M:%S"), '%M')) %>% 
     mutate(hour = format(strptime(time,"%H:%M:%S"), '%H')) %>% 
     mutate(mins = as.numeric(mins), hour = as.numeric(hour)) %>% 
-    select(date, time, INDEX, mins, hour, LEFT_CHANNEL) %>% 
-    rename(value = LEFT_CHANNEL, index = INDEX) %>% 
+    select(date, time, INDEX, mins, hour, LEFT_CHANNEL, site) %>% 
+    rename(value = LEFT_CHANNEL, index = INDEX, site.name = site) %>% 
     group_by(date) 
   
   output <- output %>% 
@@ -71,7 +88,7 @@ tidy_data <- function(input) {
     separate(date.data, into = c("year", "month", "day", sep = "-")) %>% 
     select(- `-`) 
   
-  output <- output[,c("date", "time", "year", "month", "day", "mins", "hour", "index", "value")]  
+  output <- output[,c("date", "time", "year", "month", "day", "mins", "hour", "index", "value", "site.name")]  
   
   return(output)
 }
@@ -118,22 +135,26 @@ cat_data <- function(tidy_df) {
 import_path <- paste(session_path, sub_folder, sep="/")
 setwd(import_path)
 
-# For mutiple batched datasets, assign the 't' variable below:
+# For single datasets, assign the 't.s' variable.
+# Enter the file you want to import below:
+# file <- "moth003-23_to_31-12-22-lady_bay_meadow_cove_0_acoustic_evenness_.csv"
+# t.s <- read_csv(file)
+
+# For multiple batched datasets, assign the 't' variable below:
 # The below will pull all csv files stored in the designated sub_folder into a single dataframe.
+
 t <- list.files(pattern="*.csv") %>% 
   map_df(~read_csv(.))
 
-# For single datasets, assign the 't.s' variable.
-# Enter the file you want to import below:
-file <- "moth003-23_to_31-12-22-lady_bay_meadow_cove_0_acoustic_complexity_.csv"
-t.s <- read_csv(file)
-
-tidy_t <- tidy_data(t.s)
+tidy_t <- tidy_data(t)
 complete_t <- cat_data(tidy_t)
 head(complete_t)
 
 # STAGE 3: WRITE TIDY DATA TO NEW CSV -------------------------------------------------
-
+# For single datasets:
 tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
 
-write_csv(complete_t, tidy_file)
+# for merged datasets:
+merged_data <- "lady_bay_reef_december_ACI_ADI_AEI.csv"
+
+write_csv(complete_t, merged_data)
