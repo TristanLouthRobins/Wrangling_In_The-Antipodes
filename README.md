@@ -35,7 +35,7 @@ WITA_12-EDA_ladybay.R
 
 ## AudioMoth - General scripts
 
-WITA_G-audiomoth_compute_indices_and_tidy_data.R (Version 2.6 - Jan 2023)
+WITA_G-audiomoth_compute_indices_and_tidy_data.R (Version 2.7 - Jan 2023)
 - R script which can be used in conjunction with AudioMoth acoustic data. Contains functions which will perform the following workflow:
 1) Compute user-defined acoustic indicies specific to the R package `acousticecology` and export the results as a .csv dataset.
 2) Tidy data function and call to import the .csv dataset and tidy/factorise variable data.
