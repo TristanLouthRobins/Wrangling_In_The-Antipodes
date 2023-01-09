@@ -1,0 +1,41 @@
+venue,type,area,suburb,address,rating,n_sndcheck,morning,lunch_afternoon,evening,late_night
+Peter Rabbit,cafe,Adelaide West End,Adelaide CBD,234-244 Hindley Street,74,1,1,0,0,0
+Malt Shovel Taphouse,bar,Torrens River precinct,Adelaide CBD,NA,73,3,0,3,0,0
+The Gaurdsman,bar,Adelaide CBD,Adelaide CBD,125 North Terrace,76,1,0,1,0,0
+The Strathmore Hotel,bar,Adelaide CBD,Adelaide CBD,129 North Terrace,88,1,0,0,1,0
+Black Bull,bar,Adelaide CBD,Adelaide CBD,NA,69,1,0,0,1,0
+Kintaro Sushi,restaurant,Adelaide CBD,Adelaide CBD,NA,68,1,0,1,0,0
+Shobosho,restaurant,Adelaide CBD,Adelaide CBD,17 Leigh Street,80,2,0,0,2,0
+Lady Burra Brewhouse,bar,Adelaide CBD,Adelaide CBD,41 Currie Street,84,1,0,0,1,0
+Elementary Coffee,cafe,Adelaide CBD,Adelaide CBD,9-17 Young Street,81,1,1,0,0,0
+Aces Bar and Bistro,bar,Central Markets precinct,Adelaide CBD,NA,88,1,0,0,1,0
+BBQ City,restaurant,Central Markets precinct,Adelaide CBD,84 Gouger Street,83,1,0,0,1,0
+Wah Hing,restaurant,Central Markets precinct,Adelaide CBD,85 Gouger Street,71,1,0,1,0,0
+Lantern by Nu,restaurant,Adelaide Lower West End,Adelaide CBD,10 Selby Street,66,1,0,0,1,0
+Gondola Gondola,restaurant,Adelaide West End,Adelaide CBD,1 Peel Street,79,1,0,0,1,0
+La Rambla,bar,Adelaide West End,Adelaide CBD,28 Peel Street,72,1,0,0,1,0
+Hennesy Rooftop Bar,bar,Adelaide CBD,Adelaide CBD,45 King William Street,63,1,0,0,1,0
+Spaghetti Western,restaurant,Adelaide West End,Adelaide CBD,111 King William Street,81,1,0,0,1,0
+Public,cafe,Adelaide West End,Adelaide CBD,? Franklin Street,73,1,1,0,0,0
+Harry's Bar,bar,Adelaide CBD,Adelaide CBD,12 Grenfell Street,73,1,0,1,0,0
+Louca's,restaurant,Adelaide Lower End End,Adelaide CBD,? Pultney Street,77,1,0,0,1,0
+Amalfi Pizzaria Ristorante,restaurant,Adelaide East End,Adelaide CBD,29 Frome Street,78,1,0,0,1,0
+San Giorgio,restaurant,Adelaide East End,Adelaide CBD,? Rundle Street,77,1,0,0,1,0
+Penny University,cafe,Adelaide East End,Adelaide CBD,1/7 Union Street,67,1,1,0,0,0
+Felici Espresso Bar,cafe,Adelaide East End,Adelaide CBD,261 Rundle Street,71,1,1,0,0,0
+Exchange Speciality Coffee,cafe,Adelaide East End,Adelaide CBD,Ebenezer Place,75,2,1,1,0,0
+Mothervine,bar,Adelaide East End,Adelaide CBD,? Vardon Ave,65,1,0,1,0,0
+NOLA Adelaide,restaurant,Adelaide East End,Adelaide CBD,? Vardon Ave,68,1,0,1,0,0
+Le Carpe Diem,restaurant,Adelaide East End,Adelaide CBD,232 Grenfell Street,64,1,1,0,0,0
+Gilbert Street Hotel,bar,Adelaide CBD South,Adelaide CBD,85 Gilbert Street,82,2,0,1,1,0
+Where We Met,cafe,Adelaide CBD South,Adelaide CBD,114 South Terrace,75,2,2,0,0,0
+Madre,restaurant,Adelaide CBD South,Adelaide CBD,55 Gilbert Street,81,1,0,0,1,0
+Citi Zen Chinese Restaurant,restaurant,Adelaide CBD South,Adelaide CBD,408 King William Road,79,1,0,1,0,0
+The Astor Hotel,bar,Adelaide CBD South,Adelaide CBD,437 Pultney Street,92,1,0,0,1,0
+Social Street,restaurant,Hutt Street precinct,Adelaide CBD,? Hutt Street,73,2,0,0,2,0
+ballaboosta,cafe,Hutt Street precinct,Adelaide CBD,? Hutt Street,78,1,1,0,0,0
+,,,,,,0,,,,
+,,,,,,0,,,,
+,,,,,,0,,,,
+,,,,,,0,,,,
+,,,,,,0,,,,
