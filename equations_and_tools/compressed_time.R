@@ -30,7 +30,7 @@ time_mark <- function(start_time, duration, interval, edit_amt) {
     A.m.s = A.m.m %% 1
     A.m.s = round(A.m.s * 60.0, 0)
   
-    print(paste("R-w time of minute-mark ", mark, " is: ", A.m.h, ":", A.m.m, ":", A.m.s, sep = ""))
+#    print(paste("R-w time of minute-mark ", mark, " is: ", A.m.h, ":", A.m.m, ":", A.m.s, sep = ""))
   
     r_w <- paste(A.m.h, ":", A.m.m, ":", A.m.s, sep="")
     row <- mark + 1
@@ -45,9 +45,8 @@ time_mark <- function(start_time, duration, interval, edit_amt) {
     rename("time_mark" = V1,
            "real_world" = V2)
   
-  print("===========================================")
   return(df_marks)
 }
 
-time_mark(0, 20, 10, 30)
+time_mark(0, 12, 10, 5)
 
