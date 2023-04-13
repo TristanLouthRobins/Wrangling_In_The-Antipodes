@@ -16,8 +16,8 @@ library(patchwork)
 # https://patchwork.data-imaginist.com/articles/guides/layout.html
 
 # Set WD and import dataset --------------------------------------------------------------------------------------------------------------------
-setwd("/Users/tristanlouth-robins/Documents/Documents - MacBook Pro/R data and projects/acoustic_ecology_tests/WITA_projects/data-WITA_12/")
-dataset <- "22-10_lady_bay_data.csv"
+setwd("/Users/tristanlouth-robins/Documents/Documents - MacBook Pro/R data and projects/acoustic_ecology_tests/Wrangling_In_The-Antipodes/data")
+dataset <- "WITA_12-ACI_tidy_ladybay_22100809.csv"
 data <- read_csv(dataset)
 
 # Note: This above dataset has been derived from prior acoustic complexity analysis and tidying using this R script:
