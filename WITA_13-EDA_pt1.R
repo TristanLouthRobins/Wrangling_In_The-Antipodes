@@ -1,6 +1,6 @@
 # ~ WRANGLING IN THE ANTIPODES ~            
 # 13: Return to Lady Bay
-# Part 1 - tides and seagrass exploration
+# Part 1 - tides, seagrass and acoustic complexity
 # Tristan Louth-Robins, April 2023
 # Blog post can found here: https://wranglingintheantipodes.wordpress.com/2023/04/14/return-to-lady-bay-part-1-tides-and-seagrass-exploration/ #
 
@@ -272,15 +272,17 @@ scatter_viz_single_all <- function(site,
            index == index.type) %>% 
     ggplot(aes(x=time, y=value)) +
     # mean value for the period of observation
-    geom_point(colour=points, size = 2, alpha = 0.7) +
+    geom_point(aes(colour=period), size = 2, alpha = 0.7) +
+    scale_color_brewer(palette = "Dark2") +
     geom_hline(data = wita13_overall.stats, aes(yintercept=mean), colour = "#0073ff", alpha = 0.5, linetype="solid", size = 1) +
     geom_label_repel(data = wita13_overall.stats, aes(family = lab.font, label=paste("Mean ACI: ", mean), x=60000, y=mean),colour = lab1.text,fill = lab1.fill,nudge_x = 0,nudge_y = 400,segment.linetype = 1,segment.curvature = -0.1,segment.ncp = 3,segment.angle = 0,alpha = lab.alpha, arrow = arrow(length = unit(0.02, "npc"))) +
     geom_smooth(colour="#ffd445", alpha = 0.6) +
-    geom_point(data = filter(high_tides, site.name == site, index == index.type), aes(x=time, y=value), colour = h.tide, shape=24, size=7, stroke=1, alpha=0.8) +
-    geom_point(data = filter(low_tides, site.name == site, index == index.type), aes(x=time, y=value), colour = l.tide, shape=25, size=7, stroke=1, alpha=0.8) +
+#    geom_point(data = filter(high_tides, site.name == site, index == index.type), aes(x=time, y=value), colour = h.tide, shape=24, size=7, stroke=1, alpha=0.8) +
+#    geom_point(data = filter(low_tides, site.name == site, index == index.type), aes(x=time, y=value), colour = l.tide, shape=25, size=7, stroke=1, alpha=0.8) +
     theme_wita() +
     theme(axis.title.x=element_blank(),
-          legend.title = element_blank()) +
+          legend.title = element_blank(),
+          legend.position = "none") +
     ylim(c(y.min, y.max)) +
     labs( 
          subtitle = paste(index.name, "(2022-12-23 to 2022-12-31)"), 
@@ -316,7 +318,8 @@ scatter_viz_single <- function(site,
     geom_point(data = filter(low_tides, date == date.range, site.name == site, index == index.type), aes(x=time, y=value), colour = l.tide, shape=25, size=7, stroke=1, alpha=0.8) +
     theme_wita() +
     theme(axis.title.x=element_blank(),
-          legend.title = element_blank()) +
+          legend.title = element_blank(),
+          legend.position = "none") +
     ylim(c(y.min, y.max)) +
     labs( 
          subtitle = paste(" (",date.range, ")", sep=""), 
@@ -332,7 +335,7 @@ scatter_all <-
                          1650, 3400)
 
 scatter_all 
-ggsave("exports-1/WITA_13-ACI_scatter_all_wtides.png", width = 36, height = 24, units = "cm")
+ggsave("exports-1/WITA_13-ACI_scatter_all_wtides_coloured.png", width = 36, height = 24, units = "cm")
 
 scatter_20221224 <- scatter_viz_single("Meadow cove","2022-12-24","acoustic_complexity",1650, 3400)
 scatter_20221225 <- scatter_viz_single("Meadow cove","2022-12-25","acoustic_complexity",1650, 3400)
@@ -389,6 +392,7 @@ ggsave("exports-1/WITA_13-ACI_scatter_all.png", width = 64, height = 12, units =
 # Extra-annotated version of the plot for 24th of December --
 # For comparison with time-compressed annotated spectrogram --
 
+scatter_20221224_anno <- 
 scatter_viz_single("Meadow cove","2022-12-24","acoustic_complexity",1650, 3400) +
   geom_vline(data = data %>% filter(date == "2022-12-24",hour == 2, mins == 0), aes(xintercept = time), colour = "#6d9e09", alpha = 0.6) +
   geom_label(data = data %>% filter(date == "2022-12-24", hour == 2, mins == 0), aes(family = lab.font, label="2:00", x=time, y=3000),colour = lab1.text,fill = lab1.fill,nudge_x = 0,nudge_y = 400) +
@@ -401,3 +405,55 @@ scatter_viz_single("Meadow cove","2022-12-24","acoustic_complexity",1650, 3400) 
 
 ggsave("exports-1/WITA_13-ACI_scatter-xtra_anno_20221224.png", width = 36, height = 24, units = "cm")
  
+# Patch everything together into one big infographic --
+title <- toupper("Wrangling In The Antipodes: Return to Lady Bay: Part 1")
+subtitles <- str_wrap("This data analysis examines observations made with an AudioMoth deployed 
+                      in a shallow tidal pool on Lady Bay Reef. The data has been  pre-processed 
+                      as a measure of acoustic complexity (ACI) and plotted against 24-hour time 
+                      to gain an insight into the trends of ACI over daily periods of the deployment.", 160)
+caption <- "Wrangling In The Antipodes: 'Part 1 - tides, seagrass and acoustic complexity'\nTristan Louth-Robins, 2023. Github: /TristanLouthRobins"
+
+font_add("Antonio", "/Users/tristanlouth-robins/Library/Fonts/Antonio-VariableFont_wght.ttf")
+font_add("Hiragino Sans W0", "/Users/tristanlouth-robins//Library/Fonts/ヒラギノ角ゴシック W0.ttc")
+
+base <- ggplot() +
+  labs(title = title,
+       subtitle = subtitles,
+       caption = caption) +
+  theme_wita() +
+  theme(plot.title = element_text(family = "Antonio", size = 36, colour = "#000000", margin=margin(0,0,10,0)),
+        plot.subtitle = element_text(family = "Hiragino Sans W0", size = 24, colour = "#000000", margin=margin(0,0,10,0)),
+        plot.caption = element_text(family = "Hiragino Sans W0", size = 18, colour = "#000000"),
+        plot.margin = margin(1,1,1,1, "cm"),
+        plot.background = element_rect(fill = plot.bg, colour = plot.bg))
+
+# Let's make a histogram to show the distribution of the ACI values --
+
+meadow_data <- data 
+
+meadow_data <- meadow_data %>% 
+  filter(index == "acoustic_complexity", site.name == "Meadow cove") 
+
+histo <- 
+ggplot(meadow_data) +
+  geom_histogram(aes(x = value, fill = period), bins = sqrt(nrow(meadow_data))) +
+  scale_fill_brewer(palette = "Dark2") +
+  facet_wrap(~period, nrow = 1) +
+  labs(x="", y="",title = "Acoustic complexity distributions over daily periods") +
+  theme_wita() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.position = "none")
+
+# Patch and inset everything together --
+
+ptwk <- 
+base +
+  inset_element(scatter_all, left = 0, right = 0.37, bottom = 0.50, top = 0.95) +
+  inset_element(histo, left = 0.40, right = 0.99, bottom = 0.50, top = 0.95) +
+  inset_element(all_singles, left = 0, right = 0.99, bottom = 0.05, top = 0.45) 
+ptwk
+
+ggsave("exports-1/WITA_13-patchwork_project.png", width = 72, height = 48, units = "cm")
+
+
