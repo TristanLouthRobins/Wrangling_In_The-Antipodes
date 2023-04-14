@@ -41,6 +41,8 @@ URL: https://wranglingintheantipodes.wordpress.com/2023/04/14/return-to-lady-bay
 WITA_13-EDA_pt1.R
 - R script using `tidyverse`, `ggplot` and related package to analyse tidied dataset of pre-processed Acoustic Complexity (ACI) values from deployed AudioMoth in reef location. Analysis explores the acoustic complexity values present in a seagrass meadow located in a shallow tidal pool. The script for pre-processing the acoustic data can be found in the 'AudioMoth - General scripts' section of this README file.**
 
+![WITA_13-patchwork_project](https://user-images.githubusercontent.com/62044678/231979223-2d24ad1e-85f2-497e-bc3f-3c769702e8c4.png)
+
 ## AudioMoth - General scripts
 
 WITA_G-audiomoth_compute_indices_and_tidy_data.R (Version 2.7 - Jan 2023)
