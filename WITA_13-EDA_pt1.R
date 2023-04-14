@@ -1,8 +1,8 @@
 # ~ WRANGLING IN THE ANTIPODES ~            
-# 13: Further explorations of ACI on Lady Bay Reef
-# Part 1: Seagrass meadow area and comparison with area from WITA_12
+# 13: Return to Lady Bay
+# Part 1 - tides and seagrass exploration
 # Tristan Louth-Robins, April 2023
-# Blog post can found here: https:// #
+# Blog post can found here: https://wranglingintheantipodes.wordpress.com/2023/04/14/return-to-lady-bay-part-1-tides-and-seagrass-exploration/ #
 
 # Required libraries ----------------------------------------------------------------
 library(tidyverse)
