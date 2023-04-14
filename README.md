@@ -33,6 +33,14 @@ URL: https://wranglingintheantipodes.wordpress.com/2022/12/19/acoustic-complexit
 WITA_12-EDA_ladybay.R
 - R script using `tidyverse`, `ggplot` and related packages to analyse tidied dataset of pre-processed Acoustic Complexity (ACI) values from deployed AudioMoth in reef location. Analysis explores potential association between ACI and tidal activity over 22-hour period of deployment. The dataset can be found in the /datasets directory. The script for pre-processing the acoustic data can be found in the 'AudioMoth - General scripts' section of this README file.**
 
+![wita_12-scatter-smooth](https://user-images.githubusercontent.com/62044678/231952164-102b760e-e0be-46a8-9e7d-d44393b43edd.png)
+
+### "13. Return to Lady Bay: Part 1 - Tides, seagrass and acoustic complexity" - published 14/04/2023
+URL: https://wranglingintheantipodes.wordpress.com/2023/04/14/return-to-lady-bay-part-1-tides-and-seagrass-exploration/
+
+WITA_13-EDA_pt1.R
+- R script using `tidyverse`, `ggplot` and related package to analyse tidied dataset of pre-processed Acoustic Complexity (ACI) values from deployed AudioMoth in reef location. Analysis explores the acoustic complexity values present in a seagrass meadow located in a shallow tidal pool. The script for pre-processing the acoustic data can be found in the 'AudioMoth - General scripts' section of this README file.**
+
 ## AudioMoth - General scripts
 
 WITA_G-audiomoth_compute_indices_and_tidy_data.R (Version 2.7 - Jan 2023)
