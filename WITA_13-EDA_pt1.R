@@ -335,7 +335,7 @@ scatter_all <-
                          1650, 3400)
 
 scatter_all 
-ggsave("exports-1/WITA_13-ACI_scatter_all_wtides_coloured.png", width = 36, height = 24, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter_all_wtides_coloured.png", width = 36, height = 24, units = "cm")
 
 scatter_20221224 <- scatter_viz_single("Meadow cove","2022-12-24","acoustic_complexity",1650, 3400)
 scatter_20221225 <- scatter_viz_single("Meadow cove","2022-12-25","acoustic_complexity",1650, 3400)
@@ -346,19 +346,19 @@ scatter_20221229 <- scatter_viz_single("Meadow cove","2022-12-29","acoustic_comp
 scatter_20221230 <- scatter_viz_single("Meadow cove","2022-12-30","acoustic_complexity",1650, 3400)
 
 scatter_20221224
-ggsave("exports-1/WITA_13-ACI_scatter_20221224.png", width = 36, height = 24, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter_20221224.png", width = 36, height = 24, units = "cm")
 scatter_20221225
-ggsave("exports-1/WITA_13-ACI_scatter_20221225.png", width = 36, height = 24, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter_20221225.png", width = 36, height = 24, units = "cm")
 scatter_20221226
-ggsave("exports-1/WITA_13-ACI_scatter_20221226.png", width = 36, height = 24, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter_20221226.png", width = 36, height = 24, units = "cm")
 scatter_20221227
-ggsave("exports-1/WITA_13-ACI_scatter_20221227.png", width = 36, height = 24, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter_20221227.png", width = 36, height = 24, units = "cm")
 scatter_20221228
-ggsave("exports-1/WITA_13-ACI_scatter_20221228.png", width = 36, height = 24, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter_20221228.png", width = 36, height = 24, units = "cm")
 scatter_20221229
-ggsave("exports-1/WITA_13-ACI_scatter_20221229.png", width = 36, height = 24, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter_20221229.png", width = 36, height = 24, units = "cm")
 scatter_20221230
-ggsave("exports-1/WITA_13-ACI_scatter_20221230.png", width = 36, height = 24, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter_20221230.png", width = 36, height = 24, units = "cm")
 
 # annotated plots with highlighted points and areas of interest --
 
@@ -367,7 +367,7 @@ scatter_viz_single("Meadow cove","2022-12-24","acoustic_complexity",1650, 3400) 
   geom_point(data = data %>%  filter(day == 24, hour == 14, mins == 00, site.name == "Meadow cove", index == "acoustic_complexity"),
              aes(x=time, y=value), size = 7, colour = "red", shape = 19, stroke = 1, alpha = 0.5)
 
-ggsave("exports-1/WITA_13-ACI_scatter-anno_20221224-1500.png", width = 36, height = 24, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter-anno_20221224-1500.png", width = 36, height = 24, units = "cm")
 
 # area highlighted --
 scatter_viz_single("Meadow cove","2022-12-24","acoustic_complexity",1650, 3400) + 
@@ -379,7 +379,7 @@ scatter_viz_single("Meadow cove","2022-12-24","acoustic_complexity",1650, 3400) 
             colour = "blue",
             size = 1)
 
-ggsave("exports-1/WITA_13-ACI_scatter-anno_20221224-low_ACI.png", width = 36, height = 24, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter-anno_20221224-low_ACI.png", width = 36, height = 24, units = "cm")
 
 # patch the plots together ---
 
@@ -387,7 +387,7 @@ all_singles <-
 scatter_20221224 | scatter_20221225 | scatter_20221226 | scatter_20221227 |
   scatter_20221228 | scatter_20221229 | scatter_20221230
 
-ggsave("exports-1/WITA_13-ACI_scatter_all.png", width = 64, height = 12, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter_all.png", width = 64, height = 12, units = "cm")
 
 # Extra-annotated version of the plot for 24th of December --
 # For comparison with time-compressed annotated spectrogram --
@@ -403,10 +403,10 @@ scatter_viz_single("Meadow cove","2022-12-24","acoustic_complexity",1650, 3400) 
   geom_vline(data = data %>% filter(date == "2022-12-24",hour == 19, mins == 0), aes(xintercept = time), colour = "#6d9e09", alpha = 0.6) +
   geom_label(data = data %>% filter(date == "2022-12-24", hour == 19, mins == 0), aes(family = lab.font, label="19:00", x=time, y=3000),colour = lab1.text,fill = lab1.fill,nudge_x = 0,nudge_y = 400) 
 
-ggsave("exports-1/WITA_13-ACI_scatter-xtra_anno_20221224.png", width = 36, height = 24, units = "cm")
+ggsave("exports-WITA13/WITA_13-ACI_scatter-xtra_anno_20221224.png", width = 36, height = 24, units = "cm")
  
 # Patch everything together into one big infographic --
-title <- toupper("Wrangling In The Antipodes: Return to Lady Bay: Part 1")
+title <- toupper("Wrangling In The Antipodes: Lady Bay - AudioMoth Deployment (Seagrass Meadow)")
 subtitles <- str_wrap("This data analysis examines observations made with an AudioMoth deployed 
                       in a shallow tidal pool on Lady Bay Reef. The data has been  pre-processed 
                       as a measure of acoustic complexity (ACI) and plotted against 24-hour time 
@@ -454,6 +454,6 @@ base +
   inset_element(all_singles, left = 0, right = 0.99, bottom = 0.05, top = 0.45) 
 ptwk
 
-ggsave("exports-1/WITA_13-patchwork_project.png", width = 72, height = 48, units = "cm")
+ggsave("exports-WITA13/WITA_13-patchwork_project.png", width = 72, height = 48, units = "cm")
 
 
