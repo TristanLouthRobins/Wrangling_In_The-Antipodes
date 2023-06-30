@@ -118,6 +118,8 @@ def batch_crossfade(num_files, file_start, file_end, fadelen):
 
 # Create a root window for the user input
 
+print("BATCH CROSSFADE FOR AUDACITY\n")
+print("Remember to count the files you inported into Audacity!\n\n")
 num_files = int(input("enter the number of files imported into Audacity: "))
 file_start = 0
 file_end = int(input("length of each of the files (in seconds): "))
