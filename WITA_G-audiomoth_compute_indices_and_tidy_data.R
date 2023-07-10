@@ -1,7 +1,7 @@
 # Script for computing acoustic indices using the soundecology package.
 # Tristan Louth-Robins. 2021-23
 
-# Version 2.8 (9th July 2023): 
+# Version 2.81 (10th July 2023): 
 # 2.0 - all three steps now in single script.
 # 2.5 - fixed the error in factorisation turning all month variables into a 'Summer' category.
 # 2.6 - cleaned up file import code, cleaner and more efficient.
@@ -67,14 +67,21 @@ compute_indices(adi,          # <-- index
                 0,            # <-- batch number
                 "")           # <-- misc. note
 
-# STAGE 2: READ IN RESULTS AND TIDY ----------------------------------------------------------------------------------
+###############################################################################
+# Continue processing as many analyses as you need before running eveything   #
+# below to tidy and compile the analyses into a single dataset.               #
+###############################################################################
+
+################################################################################
+################################################################################
+# STAGE 2: READ IN RESULTS AND TIDY --------------------------------------------
 # Required libraries  -
 library(forcats)
 library(stringr)
 library(lubridate)
 library(chron)
 
-# Include site variable for dataset -------------------------------------------------------------------
+# Include site variable for dataset --------------------------------------------
 setwd(resultswd)
 
 file <- list.files(pattern="*.csv") 
@@ -175,11 +182,17 @@ tidy_t <- tidy_data(t)
 complete_t <- cat_data(tidy_t)
 head(complete_t)
 
-# STAGE 3: WRITE TIDY DATA TO NEW CSV -------------------------------------------------
+# STAGE 3: WRITE TIDY DATA TO NEW CSV ------------------------------------------
 # For single datasets:
-tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
+# tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
 
 # for merged datasets:
-merged_data <- "lady_bay_reef_december_ACI_ADI_AEI.csv"
+merged_data <- paste(complete_t$site.name[1], "lala.csv", sep = "")
 
-write_csv(complete_t, tidy_file)
+write_csv(complete_t, merged_data)
+
+beach <- read_csv("mf_beach.csv")
+sheoak <- read_csv("mf_sheoak.csv")
+
+all <- full_join(beach, sheoak)
+write_csv(all, merged_data)
