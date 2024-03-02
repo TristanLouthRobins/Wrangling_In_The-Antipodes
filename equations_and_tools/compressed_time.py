@@ -7,12 +7,13 @@ import numpy as np
 import math
 
 # start time: actual time that recording begins - i.e. 14:30pm = 14.5
-# the time time compressed minute mark that we want the actual time of - i.e. 8 (minute mark)
+# the time compressed minute mark that we want the actual time of - i.e. 8 (minute mark)
 # interval: the interval for the AudioMoth to record - i.e. 5 minute interval = 5
 # edit_amt: how long each clip in the time compression is - i.e. 15 seconds
 
 def time_mark(start_time, duration, interval, edit_amt):
     print("Real-world start time was: ", start_time, ":00")
+    start_time = float(start_time)
     n = (60 / edit_amt)
     a_time = interval * n
     a_time_secs = a_time * 60
@@ -20,8 +21,10 @@ def time_mark(start_time, duration, interval, edit_amt):
     print("AudioMoth recording interval was every ", interval, " minutes.")
     print("Time compression edit amount was: ", edit_amt, " seconds.")
     print("For every compressed minute, this is approximately ", round(a_time, 0), " minutes of real-world time.\n")
+    print("Duration of compressed file is: ", duration)
 
     df_marks = pd.DataFrame()
+    last = duration - 1
 
     for i in range(duration):
         n = 60 / a_time
@@ -48,7 +51,7 @@ def time_mark(start_time, duration, interval, edit_amt):
 
     print(df_marks)
 
-start = int(input("Enter the starting real_world hour mark of the audio (24 hr time - e.g 1 or 15): "))
+start = input("Enter the starting real_world hour mark of the audio (24 hr time - e.g 1 or 15): ")
 dur = int(input("Enter the total duration of the compressed audio file (in minutes): "))
 dur = dur + 1
 interval = int(input("Enter the recording interval of the AudioMoth (in minutes): "))

@@ -1,0 +1,1 @@
+/Applications/AudioMoth-Config.app,/Applications/Audacity.app,

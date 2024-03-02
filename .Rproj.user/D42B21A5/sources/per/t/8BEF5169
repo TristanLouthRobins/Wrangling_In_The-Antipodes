@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1699654630790.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2187689158",
+    "id" : "8BEF5169",
+    "lastKnownWriteTime" : 1699659637,
+    "last_content_update" : 1699659637975,
+    "path" : "~/Documents/Documents - MacBook Pro/R Studio/acoustic_ecology_tests/Wrangling_In_The-Antipodes/WITA_15-EDA_pt2.R",
+    "project_path" : "WITA_15-EDA_pt2.R",
+    "properties" : {
+        "cursorPosition" : "296,0",
+        "scrollLine" : "284"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
