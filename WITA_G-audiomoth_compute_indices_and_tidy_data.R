@@ -1,14 +1,23 @@
 # Script for computing acoustic indices using the soundecology package.
+<<<<<<< Updated upstream
 # Tristan Louth-Robins. 2021-24
 
+=======
+# Tristan Louth-Robins. 2021-23
+
+# Version 2.8 (9th July 2023): 
+>>>>>>> Stashed changes
 # 2.0 - all three steps now in single script.
 # 2.5 - fixed the error in factorisation turning all month variables into a 'Summer' category.
 # 2.6 - cleaned up file import code, cleaner and more efficient.
 # 2.7 - new function for user input of site variable.
 # 2.8 - feature to create directory/folder for outputted results
+<<<<<<< Updated upstream
 # 2.81 - (10th July 2023): code tidy
 # 2.9 - (2nd March 2024): code tidy, extensive testing with single datasets and extended params specific to given indices.
 
+=======
+>>>>>>> Stashed changes
 
 # STEP 1: COMPUTE ACOUSTIC INDICES ---------------------------------------------
 library(soundecology)
@@ -51,10 +60,15 @@ compute_indices <- function(index, batch, note){
   multiple_sounds(directory = data_import, 
                   resultfile = dest,
                   soundindex = index,
+<<<<<<< Updated upstream
                   no_cores = "max",
                   db_threshold = -20, # <-- strictly for ADI only
                   freq_step = 50, # <-- much higher resolution analysis 
                   shannon = TRUE)
+=======
+                  no_cores = "max")
+}
+>>>>>>> Stashed changes
 
 # Create a folder for the analysis output -----
 resultswd <- folder_setup()
@@ -71,6 +85,7 @@ compute_indices(adi,          # <-- index
                 0,            # <-- batch number
                 "")           # <-- misc. note
 
+<<<<<<< Updated upstream
 ###############################################################################
 # Continue processing as many analyses as you need before running eveything   #
 # below to tidy and compile the analyses into a single dataset.               #
@@ -79,13 +94,20 @@ compute_indices(adi,          # <-- index
 ################################################################################
 ################################################################################
 # STAGE 2: READ IN RESULTS AND TIDY --------------------------------------------
+=======
+# STAGE 2: READ IN RESULTS AND TIDY ----------------------------------------------------------------------------------
+>>>>>>> Stashed changes
 # Required libraries  -
 library(forcats)
 library(stringr)
 library(lubridate)
 library(chron)
 
+<<<<<<< Updated upstream
 # Include site variable for dataset --------------------------------------------
+=======
+# Include site variable for dataset -------------------------------------------------------------------
+>>>>>>> Stashed changes
 setwd(resultswd)
 
 file <- list.files(pattern="*.csv") 
@@ -173,8 +195,13 @@ setwd(import_path)
 
 # For single datasets, assign the 't.s' variable.
 # Enter the file you want to import below:
+<<<<<<< Updated upstream
 file <- "moth003-23_to_31-12-22-lady_bay_meadow_cove_0_acoustic_evenness_.csv"
 t.s <- read_csv(file)
+=======
+# file <- "moth003-23_to_31-12-22-lady_bay_meadow_cove_0_acoustic_evenness_.csv"
+# t.s <- read_csv(file)
+>>>>>>> Stashed changes
 
 # For multiple batched datasets, assign the 't' variable below:
 # The below will pull all csv files stored in the designated sub_folder into a single dataframe.
@@ -186,6 +213,7 @@ tidy_t <- tidy_data(t)
 complete_t <- cat_data(tidy_t)
 head(complete_t)
 
+<<<<<<< Updated upstream
 # STAGE 3: WRITE TIDY DATA TO NEW CSV ------------------------------------------
 # For single datasets:
 # tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
@@ -200,3 +228,13 @@ sheoak <- read_csv("mf_sheoak.csv")
 
 all <- full_join(beach, sheoak)
 write_csv(all, merged_data)
+=======
+# STAGE 3: WRITE TIDY DATA TO NEW CSV -------------------------------------------------
+# For single datasets:
+tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
+
+# for merged datasets:
+merged_data <- "lady_bay_reef_december_ACI_ADI_AEI.csv"
+
+write_csv(complete_t, tidy_file)
+>>>>>>> Stashed changes

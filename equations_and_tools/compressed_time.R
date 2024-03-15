@@ -1,7 +1,7 @@
 library(tidyverse)
 
 # start time: actual time that recording begins - i.e. 14:30pm = 14.5
-# the time time compressed minute mark that we want the actual time of - i.e. 8 (minute mark)
+# the time compressed minute mark that we want the actual time of - i.e. 8 (minute mark)
 # interval: the interval for the AudioMoth to record - i.e. 5 minute interval = 5
 # edit_amt: how long each clip in the time compression is - i.e. 15 seconds
 
@@ -48,5 +48,5 @@ time_mark <- function(start_time, duration, interval, edit_amt) {
   return(df_marks)
 }
 
-time_mark(0, 12, 10, 5)
+time_mark(14.5, 39, 10, 14)
 
