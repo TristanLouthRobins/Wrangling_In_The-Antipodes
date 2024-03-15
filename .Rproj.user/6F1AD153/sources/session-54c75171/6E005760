@@ -12,7 +12,11 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
+<<<<<<< Updated upstream:.Rproj.user/6F1AD153/sources/session-54c75171/6E005760
         "cursorPosition": "9,121",
+=======
+        "cursorPosition": "1,5",
+>>>>>>> Stashed changes:.Rproj.user/6F1AD153/sources/session-8773de9f/CE24D3F5
         "scrollLine": "0"
     },
     "folds": "",
