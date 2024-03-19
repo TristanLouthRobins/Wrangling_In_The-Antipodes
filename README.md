@@ -8,7 +8,7 @@ This repo includes scripts, some datasets and other resources relevant to resear
 --- Latest update: 15/3/2024 --- 
 
 ### "14. Introduction to the Acoustic Diversity Index (ADI)" - published 15/03/2024
-URL: https://wranglingintheantipodes.wordpress.com/
+URL: https://wranglingintheantipodes.wordpress.com/](https://wranglingintheantipodes.wordpress.com/2024/03/15/introduction-to-the-acoustic-diversity-index-adi/
 
 ### "13. Return to Lady Bay: Part 1 - Tides, seagrass and acoustic complexity" - published 14/04/2023
 URL: https://wranglingintheantipodes.wordpress.com/2023/04/14/return-to-lady-bay-part-1-tides-and-seagrass-exploration/
