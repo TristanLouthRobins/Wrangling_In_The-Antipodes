@@ -1,12 +1,10 @@
 # Script for computing acoustic indices using the soundecology package.
 # Tristan Louth-Robins. 2021-24
-
-# Version 2.8 (9th July 2023): 
 # 2.0 - all three steps now in single script.
 # 2.5 - fixed the error in factorisation turning all month variables into a 'Summer' category.
 # 2.6 - cleaned up file import code, cleaner and more efficient.
 # 2.7 - new function for user input of site variable.
-# 2.8 - feature to create directory/folder for outputted results
+# 2.8 - (9th July 2023): feature to create directory/folder for outputted results
 # 2.81 - (10th July 2023): code tidy
 # 2.9 - (2nd March 2024): code tidy, extensive testing with single datasets and extended params specific to given indices.
 # 2.91 - (8th June 2024): error fix to compute_indices function
@@ -90,7 +88,6 @@ library(lubridate)
 library(chron)
 
 # Include site variable for dataset -------------------------------------------------------------------
-
 setwd(resultswd)
 
 file <- list.files(pattern="*.csv") 
@@ -196,8 +193,7 @@ tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
 
 # for merged datasets:
 # merged_data <- paste(complete_t$site.name[1], "test_export.csv", sep = "")
-
-write_csv(complete_t, tidy_file)
+# write_csv(complete_t, merged_data)
 
 # beach <- read_csv("mf_beach.csv")
 # sheoak <- read_csv("mf_sheoak.csv")
