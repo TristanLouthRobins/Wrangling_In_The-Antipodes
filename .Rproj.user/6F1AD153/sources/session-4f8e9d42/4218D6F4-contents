@@ -15,9 +15,11 @@
 library(soundecology)
 library(tidyverse)
 
+# your wd goes here: 
 defaultwd <- "/Users/tristanlouth-robins/data_science/acoustic_ecology/"
 setwd(defaultwd)
 
+# make sure that there is a 'raw_data' subfolder stored in the above dir!
 data_src <- "raw_data" # Sub folder containing raw acoustic data:
 data_import <- paste(defaultwd, data_src, sep = "")
 
