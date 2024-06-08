@@ -16,7 +16,8 @@ library(soundecology)
 library(tidyverse)
 
 # your wd goes here: 
-defaultwd <- "/Users/tristanlouth-robins/data_science/acoustic_ecology/"
+currentwd <- getwd()
+defaultwd <- paste(currentwd, "/data_science/acoustic_ecology/", sep="")
 setwd(defaultwd)
 
 # make sure that there is a 'raw_data' subfolder stored in the above dir!
