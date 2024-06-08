@@ -10,8 +10,13 @@
 # 2.91 - (8th June 2024): error fix to compute_indices function
 
 # STEP 1: COMPUTE ACOUSTIC INDICES ---------------------------------------------
+# Required dependencies for entire process
 library(soundecology)
 library(tidyverse)
+library(forcats)
+library(stringr)
+library(lubridate)
+library(chron)
 
 # your wd goes here: 
 currentwd <- getwd()
@@ -80,14 +85,8 @@ compute_indices(aci,          # <-- index
 ################################################################################
 ################################################################################
 
-# STAGE 2: READ IN RESULTS AND TIDY ----------------------------------------------------------------------------------
-# Required libraries  -
-library(forcats)
-library(stringr)
-library(lubridate)
-library(chron)
-
-# Include site variable for dataset -------------------------------------------------------------------
+# STAGE 2: READ IN RESULTS AND TIDY --------------------------------------------
+# Include site variable for dataset --------------------------------------------
 setwd(resultswd)
 
 file <- list.files(pattern="*.csv") 
@@ -106,7 +105,7 @@ site_input <- function(file){
 
 site_input(file)
 
-# Function for tidying the imported results -------------------
+# Function for tidying the imported results ------------------------------------
 tidy_data <- function(input) {
   output <- input %>% 
     separate(FILENAME, into = c("date", "time", sep = "_")) %>% 
@@ -132,7 +131,7 @@ tidy_data <- function(input) {
   return(output)
 }
 
-# Function for creating categorical variables ----------------------
+# Function for creating categorical variables ----------------------------------
 cat_data <- function(tidy_df) {
   cat <- tidy_df %>% 
     # Period of day, defined by range of 'hour' variable. 
@@ -169,7 +168,7 @@ cat_data <- function(tidy_df) {
   return(cat) 
 }  
 
-# Import tabular data for tidying ----------------------------------------------------
+# Import tabular data for tidying ----------------------------------------------
 import_path <- resultswd
 setwd(import_path)
 
@@ -193,19 +192,11 @@ tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
 
 # for merged datasets:
 # merged_data <- paste(complete_t$site.name[1], "test_export.csv", sep = "")
-# write_csv(complete_t, merged_data)
-
 # beach <- read_csv("mf_beach.csv")
 # sheoak <- read_csv("mf_sheoak.csv")
 # all <- full_join(beach, sheoak)
 # write_csv(all, merged_data)
 
-# STAGE 3: WRITE TIDY DATA TO NEW CSV -------------------------------------------------
-# For single datasets:
-tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
-
-# for merged datasets:
-# merged_data <- "lady_bay_reef_december_ACI_ADI_AEI.csv"
-
 write_csv(complete_t, tidy_file)
+
 
