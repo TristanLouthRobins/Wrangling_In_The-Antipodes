@@ -196,17 +196,17 @@ tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
 
 write_csv(complete_t, tidy_file)
 
-beach <- read_csv("mf_beach.csv")
-sheoak <- read_csv("mf_sheoak.csv")
-all <- full_join(beach, sheoak)
-write_csv(all, merged_data)
+# beach <- read_csv("mf_beach.csv")
+# sheoak <- read_csv("mf_sheoak.csv")
+# all <- full_join(beach, sheoak)
+# write_csv(all, merged_data)
 
 # STAGE 3: WRITE TIDY DATA TO NEW CSV -------------------------------------------------
 # For single datasets:
 tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
 
 # for merged datasets:
-merged_data <- "lady_bay_reef_december_ACI_ADI_AEI.csv"
+# merged_data <- "lady_bay_reef_december_ACI_ADI_AEI.csv"
 
 write_csv(complete_t, tidy_file)
 
