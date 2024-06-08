@@ -9,7 +9,6 @@
 # 2.8 - feature to create directory/folder for outputted results
 # 2.81 - (10th July 2023): code tidy
 # 2.9 - (2nd March 2024): code tidy, extensive testing with single datasets and extended params specific to given indices.
-# 2.91 - (8th June 2024): error fix to compute_indices function
 
 # STEP 1: COMPUTE ACOUSTIC INDICES ---------------------------------------------
 library(soundecology)
@@ -52,6 +51,10 @@ compute_indices <- function(index, batch, note){
   multiple_sounds(directory = data_import, 
                   resultfile = dest,
                   soundindex = index,
+                  no_cores = "max",
+                  db_threshold = -20, # <-- strictly for ADI only
+                  freq_step = 50, # <-- much higher resolution analysis 
+                  shannon = TRUE,
                   no_cores = "max")
 }
 
@@ -85,6 +88,7 @@ library(forcats)
 library(stringr)
 library(lubridate)
 library(chron)
+
 
 # Include site variable for dataset -------------------------------------------------------------------
 
@@ -174,8 +178,14 @@ import_path <- resultswd
 setwd(import_path)
 
 # For single datasets, assign the 't.s' variable.
+# Enter the file you want to import below:
 
+file <- "moth003-23_to_31-12-22-lady_bay_meadow_cove_0_acoustic_evenness_.csv"
 t.s <- read_csv(file)
+
+# file <- "moth003-23_to_31-12-22-lady_bay_meadow_cove_0_acoustic_evenness_.csv"
+# t.s <- read_csv(file)
+
 
 # For multiple batched datasets, assign the 't' variable below:
 # The below will pull all csv files stored in the designated sub_folder into a single dataframe.
@@ -183,21 +193,22 @@ t.s <- read_csv(file)
 t <- list.files(pattern="*.csv") %>% 
   map_df(~read_csv(.))
 
-tidy_t <- tidy_data(t.s)
+tidy_t <- tidy_data(t)
 complete_t <- cat_data(tidy_t)
 head(complete_t)
 
 # STAGE 3: WRITE TIDY DATA TO NEW CSV ------------------------------------------
 # For single datasets:
-tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
+# tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
 
 # for merged datasets:
-# merged_data <- paste(complete_t$site.name[1], "test_export.csv", sep = "")
+merged_data <- paste(complete_t$site.name[1], "lala.csv", sep = "")
 
-write_csv(complete_t, tidy_file)
+write_csv(complete_t, merged_data)
 
 beach <- read_csv("mf_beach.csv")
 sheoak <- read_csv("mf_sheoak.csv")
+
 all <- full_join(beach, sheoak)
 write_csv(all, merged_data)
 
