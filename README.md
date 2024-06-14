@@ -48,7 +48,17 @@ WITA_08-label_data.R
 
 ## AudioMoth - General scripts
 
-WITA_G-audiomoth_compute_indices_and_tidy_data.R (Version 2.7 - Jan 2023)
+WITA_G-audiomoth_compute_indices_and_tidy_data.R 
+Version history:
+# 2.0 - all three steps now in single script.
+# 2.5 - fixed the error in factorisation turning all month variables into a 'Summer' category.
+# 2.6 - cleaned up file import code, cleaner and more efficient.
+# 2.7 - new function for user input of site variable.
+# 2.8 - (9th July 2023): feature to create directory/folder for outputted results
+# 2.81 - (10th July 2023): code tidy
+# 2.9 - (2nd March 2024): code tidy, extensive testing with single datasets and extended params specific to given indices.
+# 2.91 - (8th June 2024): error fix to compute_indices function
+
 - R script which can be used in conjunction with AudioMoth acoustic data. Contains functions which will perform the following workflow:
 1) Compute user-defined acoustic indicies specific to the R package `acousticecology` and export the results as a .csv dataset.
 2) Tidy data function and call to import the .csv dataset and tidy/factorise variable data.
