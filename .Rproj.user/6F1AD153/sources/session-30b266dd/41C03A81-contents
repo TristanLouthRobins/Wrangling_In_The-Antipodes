@@ -1,31 +1,21 @@
 # Script for computing acoustic indices using the soundecology package.
 # Tristan Louth-Robins. 2021-24
-# 2.0 - all three steps now in single script.
-# 2.5 - fixed the error in factorisation turning all month variables into a 'Summer' category.
-# 2.6 - cleaned up file import code, cleaner and more efficient.
-# 2.7 - new function for user input of site variable.
-# 2.8 - (9th July 2023): feature to create directory/folder for outputted results
-# 2.81 - (10th July 2023): code tidy
-# 2.9 - (2nd March 2024): code tidy, extensive testing with single datasets and extended params specific to given indices.
-# 2.91 - (8th June 2024): error fix to compute_indices function
+# Version 3.0 - "Clean Steve"
 
-# STEP 1: COMPUTE ACOUSTIC INDICES ---------------------------------------------
+# SECTION 1: COMPUTE ACOUSTIC INDICES ---------------------------------------------
 # Required dependencies for entire process
 library(soundecology)
 library(tidyverse)
-library(forcats)
-library(stringr)
 library(lubridate)
 library(chron)
 
-# your wd goes here: 
-currentwd <- getwd()
-defaultwd <- paste(currentwd, "/data_science/acoustic_ecology/", sep="")
+# Verify and set working directory. Alternatively, specify a different wd if you like.
+defaultwd <- "/Users/tristanlouth-robins/data_science/acoustic_ecology/"
 setwd(defaultwd)
 
-# make sure that there is a 'raw_data' subfolder stored in the above dir!
-data_src <- "raw_data" # Sub folder containing raw acoustic data:
-data_import <- paste(defaultwd, data_src, sep = "")
+# Whatever directory you specify, ensure that you have created a sub_folder called 'raw_data'.
+data_src <- "raw_data" 
+data_import <- paste(defaultwd, data_src, sep = "") # append 'raw_data' to your directory. 
 
 # Function: Setup for analysis output folder -----------------------------------
 folder_setup <- function() {
@@ -47,7 +37,7 @@ compute_indices <- function(index, batch, note){
   # build string for output file name: 
   e.mothid <- readline(prompt = "enter moth id: ")
   mothid <- paste("MOTH", e.mothid, sep = "")
-  date <- readline(prompt = "enter data range (as dd-mm-yy format): ")
+  date <- readline(prompt = "enter date range (avoid using '/' characters, use dashes instead!): ")
   site.name <- readline(prompt = "enter site name: ")
   site <- paste(mothid, date, site.name, sep = "_")
   
@@ -58,14 +48,18 @@ compute_indices <- function(index, batch, note){
   multiple_sounds(directory = data_import, 
                   resultfile = dest,
                   soundindex = index,
-                  no_cores = "max")
+                  no_cores = "max"
+                  )
+  print(paste("A .csv file of the analysis has now been written to: '", resultswd, "' Continue to SECTION 2 and 3 to tidy and export your data!"))
 }
 
 
-# Create a folder for the analysis output -----
+# Create a folder for the analysis output --------------------------------------
+# Once instatiated, you need to enter this into the Console below --------------
+# For example, you might name the folder based on your project or a particular site.
 resultswd <- folder_setup()
 
-# Define abbreviate var names for acoustic indices names -----------------------
+# Define abbreviated var names for acoustic indices names ----------------------
 bi <-  "bioacoustic_index"
 aci <-  "acoustic_complexity"
 adi <-  "acoustic_diversity"
@@ -73,7 +67,7 @@ aei <- "acoustic_evenness"
 ndsi <-  "ndsi"
 
 # Perform the processing of the data using the chosen acoustic index -----------
-compute_indices(aci,          # <-- index
+compute_indices(adi,          # <-- index
                 0,            # <-- batch number
                 "")           # <-- misc. note
 
@@ -85,12 +79,18 @@ compute_indices(aci,          # <-- index
 ################################################################################
 ################################################################################
 
-# STAGE 2: READ IN RESULTS AND TIDY --------------------------------------------
-# Include site variable for dataset --------------------------------------------
+# SECTION 2: READ IN RESULTS AND TIDY --------------------------------------------
+
+# We are now going to reassign our working directory to the 'results' subfolder
+# so that R can pull the .csv file the compute_indices function just created.
 setwd(resultswd)
 
+# Look for any .csv files in this directory.
 file <- list.files(pattern="*.csv") 
 
+# This function provides a user input for setting up a unique categorical variable
+# for the site of the recording. When prompted, enter this in the Console.
+# Examples: 'eastern_wetland', 'garden', 'city_park'
 site_input <- function(file){
   site_name <- readline(prompt="Enter site name: ")
   for (i in file) {
@@ -168,35 +168,46 @@ cat_data <- function(tidy_df) {
   return(cat) 
 }  
 
-# Import tabular data for tidying ----------------------------------------------
-import_path <- resultswd
-setwd(import_path)
+# For SINGLE datasets, assign the 'single.dt' variable below.
+# If you have processed MULTIPLE datasets which you want to merge into a single
+# dataset then SKIP AHEAD to SECTION 3B (line 186)
 
-# For single datasets, assign the 't.s' variable.
+single.dt <- read_csv(file)
 
-t.s <- read_csv(file)
-
-# For multiple batched datasets, assign the 't' variable below:
-# The below will pull all csv files stored in the designated sub_folder into a single dataframe.
-
-t <- list.files(pattern="*.csv") %>% 
-  map_df(~read_csv(.))
-
-tidy_t <- tidy_data(t.s)
-complete_t <- cat_data(tidy_t)
-head(complete_t)
-
-# STAGE 3: WRITE TIDY DATA TO NEW CSV ------------------------------------------
+# SECTION 3A: WRITE TIDY DATA TO NEW CSV ---------------------------------------
 # For single datasets:
 tidy_file <- file %>% str_remove("_.csv") %>% paste("-tidy", ".csv", sep="")
-
-# for merged datasets:
-# merged_data <- paste(complete_t$site.name[1], "test_export.csv", sep = "")
-# beach <- read_csv("mf_beach.csv")
-# sheoak <- read_csv("mf_sheoak.csv")
-# all <- full_join(beach, sheoak)
-# write_csv(all, merged_data)
-
 write_csv(complete_t, tidy_file)
+
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+# For MULTIPLE batched datasets, assign the 'multiple.dt' variable below:
+# The below will merge all .csv files stored in the designated sub_folder into a single dataframe.
+
+multiple.dt <- list.files(pattern="*.csv") %>% 
+  map_df(~read_csv(.))
+
+tidy_dt <- tidy_data(multiple.dt)
+complete_t <- cat_data(tidy_dt)
+head(complete_t)
+
+# SECTION 3B: WRITE ALL MERGED TIDY DATA TO NEW CSV ----------------------------
+
+merged_data <- paste(complete_t$site.name[1], "-", "merged.csv", sep = "")
+write_csv(complete_t, merged_data)
+
+# SECTION 4: COMBINE ADDITIONAL SITES INTO ONE BIG DATASET ---------------------
+
+# If you have done analyses for more than one site and you want to merge all of 
+# these together, check your merged datasets in 'results' and do the following:
+
+# Set variables for each of your datasets and read these in.
+data1 <- read_csv("yourdata1.csv") # <-- update with your filename!
+data2 <- read_csv("yourdata2.csv") # <-- update with your filename!
+
+all <- full_join(data1, data2) # Include all of your data in full_join.
+write_csv(all, merged_data) # <-- this will either be 'tidy_file' (single dataset) or 'merged_data' (merged dataset)
+
 
 

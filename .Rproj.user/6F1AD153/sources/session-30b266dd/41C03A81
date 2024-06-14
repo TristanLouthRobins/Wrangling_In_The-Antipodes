@@ -1,30 +1,26 @@
 {
-    "id": "6E005760",
+    "id": "41C03A81",
     "path": "~/Documents/Documents - MacBook Pro/R Studio/acoustic_ecology_tests/Wrangling_In_The-Antipodes/WITA_G-audiomoth_compute_indices_and_tidy_data.R",
     "project_path": "WITA_G-audiomoth_compute_indices_and_tidy_data.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1709339538700.0,
+    "created": 1717837417248.0,
     "source_on_save": false,
-    "relative_order": 2,
+    "relative_order": 1,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-<<<<<<< Updated upstream:.Rproj.user/6F1AD153/sources/session-54c75171/6E005760
-        "cursorPosition": "9,121",
-=======
-        "cursorPosition": "1,5",
->>>>>>> Stashed changes:.Rproj.user/6F1AD153/sources/session-8773de9f/CE24D3F5
-        "scrollLine": "0"
+        "cursorPosition": "209,115",
+        "scrollLine": "189"
     },
     "folds": "",
-    "lastKnownWriteTime": 1709339837,
+    "lastKnownWriteTime": 1718339912,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1709339837509,
+    "last_content_update": 1718339912037,
     "read_only": false,
     "read_only_alternatives": []
 }
