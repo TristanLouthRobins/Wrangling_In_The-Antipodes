@@ -10,7 +10,7 @@ library(lubridate)
 library(chron)
 
 # Verify and set working directory. Alternatively, specify a different wd if you like.
-defaultwd <- "/Users/tristanlouth-robins/data_science/acoustic_ecology/"
+defaultwd <- "/your_directory_here"
 setwd(defaultwd)
 
 # Whatever directory you specify, ensure that you have created a sub_folder called 'raw_data'.
