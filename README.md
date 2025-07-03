@@ -4,13 +4,13 @@
 **WITA is a blog maintained by Tristan Louth-Robins to explore acoustic ecology with data science tools.**
 
 ### Index
-- (#"14. Introduction to the Acoustic Diversity Index" - published 15/03/2024)[#14. Introduction to the Acoustic Diversity Index - published 15/03/2024]
+- (14. Introduction to the Acoustic Diversity Index)[#14. Introduction to the Acoustic Diversity Index]
 
 This repo includes scripts, some datasets and other resources relevant to research covered on the blog. *Not everything published to the blog is featured here yet, I'm in the process of doing this though.* 
 
 --- Latest update: 3/7/2025 ---
 
-#### 14. Introduction to the Acoustic Diversity Index - published 15/03/2024
+#### 14. Introduction to the Acoustic Diversity Index
 URL: https://wranglingintheantipodes.wordpress.com/](https://wranglingintheantipodes.wordpress.com/2024/03/15/introduction-to-the-acoustic-diversity-index-adi/
 
 #### "13. Return to Lady Bay: Part 1 - Tides, seagrass and acoustic complexity" - published 14/04/2023
