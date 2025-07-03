@@ -9,11 +9,11 @@ This repo includes scripts, some datasets and other resources relevant to resear
 
 ### Index
 - [14. Introduction to the Acoustic Diversity Index](#14.-Introduction-to-the-Acoustic-Diversity-Index)
-- [13. Return to Lady Bay Part 1: Tides, seagrass and acoustic complexity](13.-Return-to-Lady-Bay-Part-1:-Tides,-seagrass-and-acoustic-complexity)
-- [12. Acoustic Complexity as an indicator of tidal activity](12.-Acoustic-Complexity-as-an-indicator-of-tidal-activity)
-- [11. Acoustic detection in monitoR: an overview](11.-Acoustic-detection-in-monitoR:-an-overview)
-- [10. NDSI: parameters in context](10.-NDSI:-parameters-in-context)
-- [Preparing big audio files for analysis](Preparing-big-audio-files-for-analysis)
+- [13. Return to Lady Bay Part 1: Tides, seagrass and acoustic complexity](#13.-Return-to-Lady-Bay-Part-1:-Tides,-seagrass-and-acoustic-complexity)
+- [12. Acoustic Complexity as an indicator of tidal activity](#12.-Acoustic-Complexity-as-an-indicator-of-tidal-activity)
+- [11. Acoustic detection in monitoR: an overview](#11.-Acoustic-detection-in-monitoR:-an-overview)
+- [10. NDSI: parameters in context](#10.-NDSI:-parameters-in-context)
+- [Preparing big audio files for analysis](#Preparing-big-audio-files-for-analysis)
 - [AudioMoth - General scripts](#AudioMoth---General-scripts)
 
 #### 14. Introduction to the Acoustic Diversity Index
