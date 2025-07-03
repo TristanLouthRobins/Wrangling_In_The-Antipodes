@@ -3,13 +3,18 @@
 
 **WITA is a blog maintained by Tristan Louth-Robins to explore acoustic ecology with data science tools.**
 
-### Index
-- [14. Introduction to the Acoustic Diversity Index](#14.-Introduction-to-the-Acoustic-Diversity-Index)
-- [AudioMoth - General scripts](#AudioMoth---General-scripts)
-
 This repo includes scripts, some datasets and other resources relevant to research covered on the blog. *Not everything published to the blog is featured here yet, I'm in the process of doing this though.* 
 
 --- Latest update: 3/7/2025 ---
+
+### Index
+- [14. Introduction to the Acoustic Diversity Index](#14.-Introduction-to-the-Acoustic-Diversity-Index)
+- [13. Return to Lady Bay Part 1: Tides, seagrass and acoustic complexity](13.-Return-to-Lady-Bay-Part-1:-Tides,-seagrass-and-acoustic-complexity)
+- [12. Acoustic Complexity as an indicator of tidal activity](12.-Acoustic-Complexity-as-an-indicator-of-tidal-activity)
+- [11. Acoustic detection in monitoR: an overview](11.-Acoustic-detection-in-monitoR:-an-overview)
+- [10. NDSI: parameters in context](10.-NDSI:-parameters-in-context)
+- [Preparing big audio files for analysis](Preparing-big-audio-files-for-analysis)
+- [AudioMoth - General scripts](#AudioMoth---General-scripts)
 
 #### 14. Introduction to the Acoustic Diversity Index
 URL: https://wranglingintheantipodes.wordpress.com/](https://wranglingintheantipodes.wordpress.com/2024/03/15/introduction-to-the-acoustic-diversity-index-adi/
@@ -71,4 +76,5 @@ Version history:
 
 26/12/22: No current issues in this script.
 
+[Back to Top](#Index)
 
