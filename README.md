@@ -14,7 +14,7 @@ This repo includes scripts, some datasets and other resources relevant to resear
 #### 14. Introduction to the Acoustic Diversity Index
 URL: https://wranglingintheantipodes.wordpress.com/](https://wranglingintheantipodes.wordpress.com/2024/03/15/introduction-to-the-acoustic-diversity-index-adi/
 
-#### "13. Return to Lady Bay: Part 1 - Tides, seagrass and acoustic complexity" - published 14/04/2023
+#### 13. Return to Lady Bay Part 1: Tides, seagrass and acoustic complexity
 URL: https://wranglingintheantipodes.wordpress.com/2023/04/14/return-to-lady-bay-part-1-tides-and-seagrass-exploration/
 
 WITA_13-EDA_pt1.R
@@ -22,7 +22,7 @@ WITA_13-EDA_pt1.R
 
 ![WITA_13-patchwork_project](https://user-images.githubusercontent.com/62044678/232259527-899b6ab7-3d50-4de7-9d9c-08524a28961a.png)
 
-#### "12. Acoustic Complexity as an indicator of tidal activity" - published 19/12/2022
+#### 12. Acoustic Complexity as an indicator of tidal activity
 URL: https://wranglingintheantipodes.wordpress.com/2022/12/19/acoustic-complexity-as-an-indicator-of-tidal-activity/
 
 WITA_12-EDA_ladybay.R
@@ -30,13 +30,13 @@ WITA_12-EDA_ladybay.R
 
 ![wita_12-scatter-smooth](https://user-images.githubusercontent.com/62044678/231952164-102b760e-e0be-46a8-9e7d-d44393b43edd.png)
 
-#### "11. Acoustic detection in monitoR – an overview" - published 10/8/2022
+#### 11. Acoustic detection in monitoR: an overview
 URL: https://wranglingintheantipodes.wordpress.com/2022/08/10/acoustic-detection-in-monitor-an-overview/
 
 WITA_11-intro_to_monitoR.R
 - R script for using `monitoR` package to generate correlation templates and perform analysis. **Note: acoustic data is not provided and the user will have to supply their own data.**
 
-#### "10. NDSI: parameters in context" - published 9/4/2022
+#### 10. NDSI: parameters in context
 URL: https://wranglingintheantipodes.wordpress.com/2022/04/09/ndsi-parameters-in-context/
 
 WITA_10-NDSI_params_in_context.R
@@ -44,7 +44,7 @@ WITA_10-NDSI_params_in_context.R
 WITA_10-dataset.csv
 - Dataset to be used in conjunction with the above R code.
 
-#### "8. Preparing big audio files for analysis" - published 20/10/2021
+#### Preparing big audio files for analysis
 URL: https://wranglingintheantipodes.wordpress.com/2021/10/20/preparing-big-audio-files-for-analysis/
 
 WITA_08-label_data.R 
