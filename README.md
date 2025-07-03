@@ -5,6 +5,7 @@
 
 ### Index
 - [14. Introduction to the Acoustic Diversity Index](#14.-Introduction-to-the-Acoustic-Diversity-Index)
+- [AudioMoth - General scripts](#AudioMoth---General-scripts)
 
 This repo includes scripts, some datasets and other resources relevant to research covered on the blog. *Not everything published to the blog is featured here yet, I'm in the process of doing this though.* 
 
